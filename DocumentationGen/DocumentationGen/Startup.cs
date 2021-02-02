@@ -45,6 +45,31 @@ namespace DocumentationGen
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //dotnet user-secrets init
+            //dotnet user-secrets set "Authentication:Google:ClientId" "983362848508-nmaaj99gej4lu809i93kt0fkhf853hcs.apps.googleusercontent.com"
+            //dotnet user-secrets set "Authentication:Google:ClientSecret" "NQjJBXvVxdhKj8pLoAv_x6ZD"
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
+
+            // To see all saved secret ids go to -- %APPDATA%\Microsoft\UserSecrets\78bbecdb-d6b9-4f9d-a0dc-11a6195fcff1\secrets.json
+
+            //dotnet user-secrets set "Authentication:Microsoft:ClientId" "679f86be-7a06-4c65-ab19-7d3a2eb96000"
+            //dotnet user-secrets set "Authentication:Microsoft:ClientSecret" "q~3t_Y0G.Kxz5Zxvff1qVkM3ZP~AQGIM4M"
+
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
