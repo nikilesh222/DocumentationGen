@@ -1,11 +1,13 @@
-export const ApplicationName = 'DocumentationGen';
+import { environment } from "src/environments/environment";
+
+export const ApplicationName = environment.ApplicationName;
 
 export const ReturnUrlType = 'returnUrl';
 
 export const QueryParameterNames = {
   ReturnUrl: ReturnUrlType,
   Message: 'message'
-};
+}; 
 
 export const LogoutActions = {
   LogoutCallback: 'logout-callback',

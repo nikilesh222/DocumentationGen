@@ -1,5 +1,6 @@
 using DocumentationGen.Data;
 using DocumentationGen.Models;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Configuration;
 
 namespace DocumentationGen
 {
@@ -33,18 +35,38 @@ namespace DocumentationGen
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+#if DEBUG
+            // for syntax https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-5.0
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+               .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
+               {
+                   options.Clients.AddSPA(
+                       "DocumentationGen", spa =>
+                       spa.WithRedirectUri("http://localhost:4200/authentication/login-callback")
+                          .WithLogoutRedirectUri(
+                              "http://localhost:4200/authentication/logout-callback").WithClientId("DocumentationGenDev"));
+                });
+#endif
+
+#if !DEBUG
+            services.AddIdentityServer()
+               .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+#endif
+
+
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+                
             services.AddControllersWithViews();
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
+#if !DEBUG
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+#endif
 
             //dotnet user-secrets init
             //dotnet user-secrets set "Authentication:Google:ClientId" "983362848508-nmaaj99gej4lu809i93kt0fkhf853hcs.apps.googleusercontent.com"
@@ -77,6 +99,12 @@ namespace DocumentationGen
         {
             if (env.IsDevelopment())
             {
+                app.UseCors(options => options.SetIsOriginAllowed((host) => true)
+                                          .AllowAnyMethod()
+                                          .AllowAnyHeader()
+                                          .AllowCredentials()
+                                          );
+
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
@@ -107,6 +135,7 @@ namespace DocumentationGen
                 endpoints.MapRazorPages();
             });
 
+#if !DEBUG
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -119,6 +148,7 @@ namespace DocumentationGen
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+#endif
         }
     }
 }
