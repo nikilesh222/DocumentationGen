@@ -1,4 +1,4 @@
-import { environment } from "src/environments/environment";
+import { environment } from "../environments/environment";
 
 export const ApplicationName = environment.ApplicationName;
 
@@ -26,14 +26,14 @@ export const LoginActions = {
 let applicationPaths: ApplicationPathsType = {
   DefaultLoginRedirectPath: '/',
   ApiAuthorizationClientConfigurationUrl: `/_configuration/${ApplicationName}`,
-  Login: `authentication/${LoginActions.Login}`,
-  LoginFailed: `authentication/${LoginActions.LoginFailed}`,
-  LoginCallback: `authentication/${LoginActions.LoginCallback}`,
-  Register: `authentication/${LoginActions.Register}`,
-  Profile: `authentication/${LoginActions.Profile}`,
-  LogOut: `authentication/${LogoutActions.Logout}`,
-  LoggedOut: `authentication/${LogoutActions.LoggedOut}`,
-  LogOutCallback: `authentication/${LogoutActions.LogoutCallback}`,
+  Login: `${LoginActions.Login}`,
+  LoginFailed: `${LoginActions.LoginFailed}`,
+  LoginCallback: `${LoginActions.LoginCallback}`,
+  Register: `${LoginActions.Register}`,
+  Profile: `${LoginActions.Profile}`,
+  LogOut: `${LogoutActions.Logout}`,
+  LoggedOut: `${LogoutActions.LoggedOut}`,
+  LogOutCallback: `${LogoutActions.LogoutCallback}`,
   LoginPathComponents: [],
   LoginFailedPathComponents: [],
   LoginCallbackPathComponents: [],

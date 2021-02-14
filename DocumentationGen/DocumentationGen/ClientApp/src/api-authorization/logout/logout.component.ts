@@ -22,7 +22,8 @@ export class LogoutComponent implements OnInit {
     private router: Router) { }
 
   async ngOnInit() {
-    const action = this.activatedRoute.snapshot.url[1];
+    // const action = this.activatedRoute.snapshot.url[1];
+    const action = this.activatedRoute.snapshot.url[0];
     switch (action.path) {
       case LogoutActions.Logout:
         if (!!window.history.state.local) {
@@ -103,9 +104,12 @@ export class LogoutComponent implements OnInit {
       // This is an extra check to prevent open redirects.
       throw new Error('Invalid return url. The return url needs to have the same origin as the current page.');
     }
+    // return (state && state.returnUrl) ||
+    //   fromQuery ||
+    //   ApplicationPaths.LoggedOut;
     return (state && state.returnUrl) ||
       fromQuery ||
-      ApplicationPaths.LoggedOut;
+      `authentication/${ApplicationPaths.LoggedOut}`;
   }
 }
 
