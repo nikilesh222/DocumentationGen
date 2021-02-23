@@ -17,6 +17,10 @@ const appRoutes: Routes = [
     path: 'authentication',
     loadChildren: () => import('../api-authorization/api-authorization.module').then(m => m.ApiAuthorizationModule)
   },
+  {
+    path: 'html',
+    loadChildren: () => import('./modules/html-viewer/html-viewer.module').then(m => m.HtmlViewerModule)
+  },
   // {
   //   path: 'router-doc',
   //   loadChildren: () => import('./angular/docs/router-doc-module.module').then(m => m.RouterDocModule)

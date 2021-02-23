@@ -45,7 +45,13 @@ namespace DocumentationGen
                        spa.WithRedirectUri("http://localhost:4200/authentication/login-callback")
                           .WithLogoutRedirectUri(
                               "http://localhost:4200/authentication/logout-callback").WithClientId("DocumentationGenDev"));
-                });
+
+                   options.Clients.AddSPA(
+                       "DocumentationGen", spa =>
+                       spa.WithRedirectUri("http://localhost:4201/authentication/login-callback")
+                          .WithLogoutRedirectUri(
+                              "http://localhost:4201/authentication/logout-callback").WithClientId("DocumentationGenDev1"));
+               });
 #endif
 
 #if !DEBUG

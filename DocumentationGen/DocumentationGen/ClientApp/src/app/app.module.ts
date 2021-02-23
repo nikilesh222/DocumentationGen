@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 // import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
 // import { AuthorizeGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     // ApiAuthorizationModule,
     // RouterModule.forRoot([
     //   { path: '', component: HomeComponent, pathMatch: 'full' },
