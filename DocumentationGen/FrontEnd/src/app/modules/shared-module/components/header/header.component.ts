@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { map } from 'rxjs/internal/operators/map';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     media: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
-    private authorizeService: AuthorizeService
+    private authorizeService: AuthorizeService,
+    private router: Router
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -42,6 +44,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.userName = this.authorizeService.getUser().pipe(map(u => u && u.name));
     this.changeDetectorRef.detectChanges();
+  }
+
+  navigate(path: string) {
+    this.router.navigateByUrl(path, {
+      replaceUrl: true
+    });
   }
 
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));

@@ -1,3 +1,4 @@
+import { AuthorizeGuard } from './../api-authorization/authorize.guard';
 import { HeaderComponent } from './modules/shared-module/components/header/header.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,23 +9,25 @@ const routes: Routes = [
     component: HeaderComponent,
     children:[
       {
+        path: '',
+        loadChildren: () => import('./modules/landing-module/landing-module.module').then(m => m.LandingModule)
+      },
+      {
         path: 'content',
-        loadChildren: () => import('./modules/content-module/content-module.module').then(m => m.ContentModule)
-      }   
+        loadChildren: () => import('./modules/content-module/content-module.module').then(m => m.ContentModule),
+        canActivate: [AuthorizeGuard]
+      },
+      {
+        path: 'html5',
+        loadChildren: () => import('./modules/html-module/html-module.module').then(m => m.HtmlModuleModule),
+        canActivate: [AuthorizeGuard]
+      }
     ]
   },
   {
     path: 'authentication',
     loadChildren: () => import('../api-authorization/api-authorization.module').then(m => m.ApiAuthorizationModule)
   }
-  // {
-  //   path: 'shell',
-  //   loadChildren: () => import('./modules/shared-module/shared-module.module').then(m => m.SharedModule)
-  // },
-  // {
-  //   path: 'content',
-  //   loadChildren: () => import('./modules/content-module/content-module.module').then(m => m.ContentModule)
-  // }
 ];
 
 @NgModule({
