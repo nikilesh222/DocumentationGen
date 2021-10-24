@@ -21,6 +21,11 @@ const routes: Routes = [
         path: 'html5',
         loadChildren: () => import('./modules/html-module/html-module.module').then(m => m.HtmlModuleModule),
         canActivate: [AuthorizeGuard]
+      },
+      {
+        path: 'sql',
+        loadChildren: () => import('./modules/sql-module/sql-module.module').then(m => m.SqlModule),
+        canActivate: [AuthorizeGuard]
       }
     ]
   },
