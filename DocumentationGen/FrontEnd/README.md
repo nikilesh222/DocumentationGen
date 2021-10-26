@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# TAILWIND CSS Integration
+1. `npm install -D tailwindcss@latest postcss@latest autoprefixer@latest`
+2. `npx tailwindcss init`
+3. `npm i @tailwindcss/typography`
+4. `npm i @tailwindcss/forms`
