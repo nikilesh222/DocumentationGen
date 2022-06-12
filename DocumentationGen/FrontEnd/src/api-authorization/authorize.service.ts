@@ -50,7 +50,7 @@ export class AuthorizeService {
   }
 
   public getUser(): Observable<IUser | null> {
-    if(this.userSubject)
+    if (this.userSubject)
       return concat(
         this.userSubject.pipe(take(1), filter(u => !!u)),
         this.getUserFromStorage().pipe(filter(u => !!u), tap(u => this.userSubject ? this.userSubject.next(u) : null)),
@@ -78,7 +78,7 @@ export class AuthorizeService {
     let user: User | null = null;
     try {
       user = await this.userManager.signinSilent(this.createArguments());
-      if(this.userSubject)
+      if (this.userSubject)
         this.userSubject.next(user.profile);
       return this.success(state);
     } catch (silentError) {
@@ -90,10 +90,10 @@ export class AuthorizeService {
           throw new Error('Popup disabled. Change \'authorize.service.ts:AuthorizeService.popupDisabled\' to false to enable it.');
         }
         user = await this.userManager.signinPopup(this.createArguments());
-        if(this.userSubject)
+        if (this.userSubject)
           this.userSubject.next(user.profile);
         return this.success(state);
-      } catch (popupError) {
+      } catch (popupError: any) {
         if (popupError.message === 'Popup window closed') {
           // The user explicitly cancelled the login action by closing an opened popup.
           return this.error('The user closed the window.');
@@ -105,7 +105,7 @@ export class AuthorizeService {
         try {
           await this.userManager.signinRedirect(this.createArguments(state));
           return this.redirect();
-        } catch (redirectError) {
+        } catch (redirectError: any) {
           console.log('Redirect authentication error: ', redirectError);
           return this.error(redirectError);
         }
@@ -117,7 +117,7 @@ export class AuthorizeService {
     try {
       await this.ensureUserManagerInitialized();
       const user = await this.userManager.signinCallback(url);
-      if(this.userSubject)
+      if (this.userSubject)
         this.userSubject.next(user && user.profile);
       return this.success(user && user.state);
     } catch (error) {
@@ -134,7 +134,7 @@ export class AuthorizeService {
 
       await this.ensureUserManagerInitialized();
       await this.userManager.signoutPopup(this.createArguments());
-      if(this.userSubject)
+      if (this.userSubject)
         this.userSubject.next(null);
       return this.success(state);
     } catch (popupSignOutError) {
@@ -142,7 +142,7 @@ export class AuthorizeService {
       try {
         await this.userManager.signoutRedirect(this.createArguments(state));
         return this.redirect();
-      } catch (redirectSignOutError) {
+      } catch (redirectSignOutError: any) {
         console.log('Redirect signout error: ', popupSignOutError);
         return this.error(redirectSignOutError);
       }
@@ -153,10 +153,10 @@ export class AuthorizeService {
     await this.ensureUserManagerInitialized();
     try {
       const response = await this.userManager.signoutCallback(url);
-      if(this.userSubject)
+      if (this.userSubject)
         this.userSubject.next(null);
       return this.success(response && response.state);
-    } catch (error) {
+    } catch (error: any) {
       console.log(`There was an error trying to log out '${error}'.`);
       return this.error(error);
     }
@@ -196,7 +196,7 @@ export class AuthorizeService {
 
     this.userManager.events.addUserSignedOut(async () => {
       await this.userManager.removeUser();
-      if(this.userSubject)
+      if (this.userSubject)
         this.userSubject.next(null);
     });
   }

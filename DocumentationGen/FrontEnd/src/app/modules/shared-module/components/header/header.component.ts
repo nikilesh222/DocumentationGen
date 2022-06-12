@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
@@ -13,18 +13,11 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  mobileQuery: MediaQueryList;
   public isAuthenticated: Observable<boolean> | undefined;
   public userName: Observable<string | null | undefined> | undefined;
-  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
-  fillerContent = Array.from({ length: 50 }, () =>
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-       laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`);
-
-  private _mobileQueryListener: () => void;
+  public solutionsToggle: boolean = false;
+  public moreToggle: boolean = false;
+  public mobileViewMenu: boolean = false;
 
   constructor(
     media: MediaMatcher,
@@ -32,12 +25,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private authorizeService: AuthorizeService,
     private router: Router
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   ngOnInit(): void {
@@ -52,6 +42,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  toggle(elId: string) {
+    if (elId == 'Solutions'){
+      this.solutionsToggle = !this.solutionsToggle;
+    } else if(elId == 'More'){
+      this.moreToggle = !this.moreToggle;
+    } else if(elId == 'MobileViewMenu'){
+      this.mobileViewMenu = !this.mobileViewMenu;
+    }
+  }
 
 }

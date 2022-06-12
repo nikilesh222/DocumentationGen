@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'sql',
         loadChildren: () => import('./modules/sql-module/sql-module.module').then(m => m.SqlModule),
-        // canActivate: [AuthorizeGuard]
+        canActivate: [AuthorizeGuard]
       }
     ]
   },
