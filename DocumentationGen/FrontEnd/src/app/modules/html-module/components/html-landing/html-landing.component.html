@@ -1,19 +1,22 @@
 <div class="container">
-	<p>html-landing works!</p>
-</div>
-
-<!-- Element button list -->
-<button (click)="apply('h1')">h1</button>
-<button>h2</button>
-<button>P</button>
-<button>h3</button>
-<button>h4</button>
-<button>h5</button>
-<button>h6</button>
-
-<!-- Text box -->
-<input type="text" name="" id="">
-<!-- Preview -->
-<div id="preview">
-
+	<div style="margin: 2px;">
+		<div class="row">
+			<div class="col-md-4">
+				<!-- Element button list -->
+				<button class="btn btn-primary mr-1" (click)="apply('h1')">h1</button>
+				<button class="btn btn-primary mr-1" (click)="apply('h2')">h2</button>
+				<button class="btn btn-primary mr-1" (click)="apply('p')">P</button>
+				<button class="btn btn-primary mr-1" (click)="apply('h3')">h3</button>
+				<button class="btn btn-primary mr-1" (click)="apply('h4')">h4</button>
+				<button class="btn btn-primary mr-1" (click)="apply('h5')">h5</button>
+				<button class="btn btn-primary mr-1" (click)="apply('h6')">h6</button>
+			</div>
+			<div class="col-md-8">
+				<!-- Preview -->
+				<div id="preview">
+					Hello World!
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

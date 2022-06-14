@@ -16,5 +16,4 @@ export class HtmlLandingComponent implements OnInit {
 	apply(tag: string) {
 		console.log(tag);
 	}
-
 }
