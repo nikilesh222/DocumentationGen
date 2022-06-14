@@ -6,14 +6,14 @@ import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [ SqlLandingComponent ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(
-      [
-        { path: '', component: SqlLandingComponent }
-      ]
-    ),
-  ]
+	declarations: [SqlLandingComponent],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(
+			[
+				{ path: '', component: SqlLandingComponent }
+			]
+		),
+	]
 })
 export class SqlModule { }

@@ -4,16 +4,16 @@ import { RouterModule } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
-  declarations: [
-    LandingComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(
-      [
-        { path: '', component: LandingComponent }
-      ]
-    )
-  ]
+	declarations: [
+		LandingComponent
+	],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(
+			[
+				{ path: '', component: LandingComponent }
+			]
+		)
+	]
 })
 export class LandingModule { }

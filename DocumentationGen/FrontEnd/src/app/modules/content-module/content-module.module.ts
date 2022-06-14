@@ -9,20 +9,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [
-    ContentComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(
-      [
-        { path: '', component: ContentComponent }
-      ]
-    ),
-    MatGridListModule,
-    MatCardModule,
-    MatButtonModule,
-    FontAwesomeModule
-  ]
+	declarations: [
+		ContentComponent
+	],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(
+			[
+				{ path: '', component: ContentComponent }
+			]
+		),
+		MatGridListModule,
+		MatCardModule,
+		MatButtonModule,
+		FontAwesomeModule
+	]
 })
 export class ContentModule { }

@@ -6,14 +6,14 @@ import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [ HtmlLandingComponent ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(
-      [
-        { path: '', component: HtmlLandingComponent }
-      ]
-    ),
-  ]
+	declarations: [HtmlLandingComponent],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(
+			[
+				{ path: '', component: HtmlLandingComponent }
+			]
+		),
+	]
 })
 export class HtmlModuleModule { }

@@ -8,16 +8,16 @@ import { SharedModule } from './modules/shared-module/shared-module.module';
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SharedModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		SharedModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,78 +1,58 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <div
-    style="
+	<div style="
       box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%),
         0 2px 6px 2px rgb(60 64 67 / 15%);
-    "
-  >
-    <mat-toolbar color="primary">
-      <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-        (click)="snav.toggle()"
-        *ngIf="isAuthenticated | async"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span *ngIf="!(isAuthenticated | async)" style="padding-left: 20px; cursor: pointer;" (click)="navigate('/')">Documentation Gen</span>
-      <span *ngIf="isAuthenticated | async" style="cursor: pointer;" (click)="navigate('/content')">Documentation Gen</span>
-      <span class="example-spacer"></span>
-      <div *ngIf="!(isAuthenticated | async)">
-        <button
-          mat-button
-          class="icon-with-name pad-05"
-          aria-label="Example icon-button with share icon"
-          [routerLink]="['authentication/login']"
-        >
-          <span>Sign in / Signu up </span>
-          <mat-icon>login</mat-icon>
-        </button>
-      </div>
-      <div *ngIf="isAuthenticated | async">
-        <span class="username">{{ userName | async }}</span> |
-        <button
-          mat-button
-          class="icon-with-name pad-05"
-          aria-label="Example icon-button with share icon"
-          [routerLink]="['authentication/logout']"
-        >
-          <span>Sign out </span>
-          <mat-icon>logout</mat-icon>
-        </button>
-      </div>
-    </mat-toolbar>
-  </div>
+    ">
+		<mat-toolbar color="primary">
+			<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+				(click)="snav.toggle()" *ngIf="isAuthenticated | async">
+				<mat-icon>menu</mat-icon>
+			</button>
+			<span *ngIf="!(isAuthenticated | async)" style="padding-left: 20px; cursor: pointer;"
+				(click)="navigate('/')">Documentation Gen</span>
+			<span *ngIf="isAuthenticated | async" style="cursor: pointer;" (click)="navigate('/content')">Documentation
+				Gen</span>
+			<span class="example-spacer"></span>
+			<div *ngIf="!(isAuthenticated | async)">
+				<button mat-button class="icon-with-name pad-05" aria-label="Example icon-button with share icon"
+					[routerLink]="['authentication/login']">
+					<span>Sign in / Signu up </span>
+					<mat-icon>login</mat-icon>
+				</button>
+			</div>
+			<div *ngIf="isAuthenticated | async">
+				<span class="username">{{ userName | async }}</span> |
+				<button mat-button class="icon-with-name pad-05" aria-label="Example icon-button with share icon"
+					[routerLink]="['authentication/logout']">
+					<span>Sign out </span>
+					<mat-icon>logout</mat-icon>
+				</button>
+			</div>
+		</mat-toolbar>
+	</div>
 
-  <mat-sidenav-container
-    class="example-sidenav-container"
-    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
-  >
-    <mat-sidenav
-      #snav
-      [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56"
-    >
-      <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{
-          nav
-        }}</a>
-      </mat-nav-list>
-    </mat-sidenav>
+	<mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+		<mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+			fixedTopGap="56">
+			<mat-nav-list>
+				<a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{
+					nav
+					}}</a>
+			</mat-nav-list>
+		</mat-sidenav>
 
-    <mat-sidenav-content>
-      <div>
-        <!-- <div
+		<mat-sidenav-content>
+			<div>
+				<!-- <div
           style="
             padding: 1em 2.5em 2.5em 2em;
             background-color: white;
             box-shadow: 20px solid black;
           "
         > -->
-        <router-outlet></router-outlet>
-        <!-- </div> -->
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+				<router-outlet></router-outlet>
+				<!-- </div> -->
+			</div>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
 </div>
