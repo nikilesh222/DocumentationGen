@@ -1,8 +1,12 @@
 # DocumentationGen
 
-## Prerequisits
+## Prerequisits >> OLD
 Angular CLI: 10.1.6
 Node: 14.13.1
+
+## Prerequisits >> NEW
+Angular CLI: 14.0.0
+Node: 16.15.1
 
 ## Publishing to IIS
 Make sure that iis server is enabled in your system, if not follow the below screenshot to enable it
