@@ -9,9 +9,8 @@
 				<mat-icon>menu</mat-icon>
 			</button>
 			<span *ngIf="!(isAuthenticated | async)" style="padding-left: 20px; cursor: pointer;"
-				(click)="navigate('/')">Documentation Gen</span>
-			<span *ngIf="isAuthenticated | async" style="cursor: pointer;" (click)="navigate('/content')">Documentation
-				Gen</span>
+				(click)="navigate('/')">SMS</span>
+			<span *ngIf="isAuthenticated | async" style="cursor: pointer;" (click)="navigate('/content')">SMS</span>
 			<span class="example-spacer"></span>
 			<div *ngIf="!(isAuthenticated | async)">
 				<button mat-button class="icon-with-name pad-05" aria-label="Example icon-button with share icon"

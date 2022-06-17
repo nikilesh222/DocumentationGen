@@ -4,39 +4,48 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: HeaderComponent,
-		children: [
-			{
-				path: '',
-				loadChildren: () => import('./modules/landing-module/landing-module.module').then(m => m.LandingModule)
-			},
-			{
-				path: 'content',
-				loadChildren: () => import('./modules/content-module/content-module.module').then(m => m.ContentModule),
-				canActivate: [AuthorizeGuard]
-			},
-			{
-				path: 'html5',
-				loadChildren: () => import('./modules/html-module/html-module.module').then(m => m.HtmlModuleModule),
-				canActivate: [AuthorizeGuard]
-			},
-			{
-				path: 'sql',
-				loadChildren: () => import('./modules/sql-module/sql-module.module').then(m => m.SqlModule),
-				canActivate: [AuthorizeGuard]
-			}
-		]
-	},
-	{
-		path: 'authentication',
-		loadChildren: () => import('../api-authorization/api-authorization.module').then(m => m.ApiAuthorizationModule)
-	}
+  //{
+  //	path: '',
+  //	component: HeaderComponent,
+  //	children: [
+  //		{
+  //			path: '',
+  //			loadChildren: () => import('./modules/landing-module/landing-module.module').then(m => m.LandingModule)
+  //		},
+  //		{
+  //			path: 'content',
+  //			loadChildren: () => import('./modules/content-module/content-module.module').then(m => m.ContentModule),
+  //			canActivate: [AuthorizeGuard]
+  //		},
+  //		{
+  //			path: 'html5',
+  //			loadChildren: () => import('./modules/html-module/html-module.module').then(m => m.HtmlModuleModule),
+  //			canActivate: [AuthorizeGuard]
+  //		},
+  //		{
+  //			path: 'sql',
+  //			loadChildren: () => import('./modules/sql-module/sql-module.module').then(m => m.SqlModule),
+  //			canActivate: [AuthorizeGuard]
+  //		}
+  //	]
+  //},
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'sms-overview'
+  },
+  {
+    path: 'sms-overview',
+    loadChildren: () => import('./modules/sms-overview/sms-overview.module').then(m => m.SmsOverviewModule)
+  },
+  {
+    path: 'authentication',
+    loadChildren: () => import('../api-authorization/api-authorization.module').then(m => m.ApiAuthorizationModule)
+  }
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
