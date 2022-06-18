@@ -6,26 +6,29 @@ import { tap } from 'rxjs/operators';
 import { ApplicationPaths, QueryParameterNames } from './api-authorization.constants';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthorizeGuard implements CanActivate {
-	constructor(private authorize: AuthorizeService, private router: Router) {
-	}
+  constructor(private authorize: AuthorizeService, private router: Router) {
+  }
 
-	canActivate(
-		_next: ActivatedRouteSnapshot,
-		state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-		return this.authorize.isAuthenticated()
-			.pipe(tap(isAuthenticated => this.handleAuthorization(isAuthenticated, state)));
-	}
+  canActivate(
+    _next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    //return this.authorize.isAuthenticated()
+    //.pipe(tap(isAuthenticated => this.handleAuthorization(isAuthenticated, state)));
+    return this.authorize.isAccessTokenAvail()
+    .pipe(tap(isAuthenticated => this.handleAuthorization(isAuthenticated, state)));
+  }
 
-	private handleAuthorization(isAuthenticated: boolean, state: RouterStateSnapshot) {
-		if (!isAuthenticated) {
-			this.router.navigate(ApplicationPaths.LoginPathComponents, {
-				queryParams: {
-					[QueryParameterNames.ReturnUrl]: state.url
-				}
-			});
-		}
-	}
+  private handleAuthorization(isAuthenticated: boolean, state: RouterStateSnapshot) {
+    if (!isAuthenticated) {
+      //this.router.navigate(ApplicationPaths.LoginPathComponents, {
+      //  queryParams: {
+      //    [QueryParameterNames.ReturnUrl]: state.url
+      //  }
+      //});
+      this.router.navigate(['/authentication/login']);
+    }
+  }
 }

@@ -39,6 +39,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/sms-overview/sms-overview.module').then(m => m.SmsOverviewModule)
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./modules/dashboard-module/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthorizeGuard]
+  },
+  {
     path: 'authentication',
     loadChildren: () => import('../api-authorization/api-authorization.module').then(m => m.ApiAuthorizationModule)
   }
